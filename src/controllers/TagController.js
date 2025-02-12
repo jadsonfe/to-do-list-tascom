@@ -1,4 +1,4 @@
-const { Tag } = require('../models');
+const { Tag, Task } = require('../models');
 
 class TagController {
 
@@ -14,8 +14,23 @@ class TagController {
     }
 
     async store(req, res) {
-        const { name, color } = req.body;
+        const { name, color, taskIds } = req.body;
+
+       
         const tag = await Tag.create({ name, color });
+
+       
+        if (taskIds && taskIds.length > 0) {
+            const tasks = await Task.findAll({
+                where: {
+                    id: taskIds
+                }
+            });
+
+      
+            await tag.setTasks(tasks);
+        }
+
         return res.json(tag);
     }
 
