@@ -1,21 +1,11 @@
+require("dotenv").config();
 module.exports = {
   development: {
-    username: "postgres",
-    password: "postgres",
-    database: "to-do-list-tascon",
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
     host: "127.0.0.1",
     dialect: "postgres"
   }
 };
 
-
-
-/*module.exports = {
-  
-    username: "seu username",
-    password: "sua senha",
-    database: "seu nome do banco",
-    host: "127.0.0.1",
-    dialect: "postgres",
-  };
-*/

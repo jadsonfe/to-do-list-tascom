@@ -4,6 +4,7 @@ const UserController = require('./controllers/UserController');
 const validateUser = require('./middlewares/validation');
 const TaskController = require('./controllers/TaskController');
 const TagController = require('./controllers/TagController');
+const authMiddleware = require('./middlewares/authMiddleware');
 
 routes.get('/health', (req, res) => {
     return res.status(200).json({message: 'Server online'});
@@ -13,7 +14,10 @@ routes.get('/health', (req, res) => {
 // Rotas de Usuários
 
 // Rota para criar um novo usuario
-routes.post('/users',validateUser, UserController.store);
+routes.post('/users/register',validateUser, UserController.store);
+
+// Rota para login
+routes.post('/users/login', UserController.login);
 
 // Rota para listar todos os usuarios
 routes.get('/users', UserController.index);
@@ -22,10 +26,10 @@ routes.get('/users', UserController.index);
 routes.get('/users/:id', UserController.show);
 
 // Rota para atualizar um usuario
-routes.put('/users/:id',validateUser, UserController.update);
+routes.put('/users/:id',validateUser, authMiddleware , UserController.update);
 
 // Rota para deletar um usuario
-routes.delete('/users/:id', UserController.delete);
+routes.delete('/users/:id',authMiddleware, UserController.delete);
 
 // Rotas de Tarefas
 
