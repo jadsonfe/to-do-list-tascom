@@ -41,4 +41,21 @@ routes.put('/tasks/:id', TaskController.update);
 // Rota para deletar uma tarefa
 routes.delete('/tasks/:id', TaskController.delete);
 
+// Rotas de Tags
+
+// Rota para criar uma nova tag
+routes.post('/tags', TagController.store);
+
+// Rota para listar todas as tags
+routes.get('/tags', TagController.index);
+
+// Rota para mostrar uma unica tag
+routes.get('/tags/:id', TagController.show);
+
+// Rota para atualizar uma tag
+routes.put('/tags/:id', TagController.update);
+
+// Rota para deletar uma tag
+routes.delete('/tags/:id', TagController.delete);
+
 module.exports = routes;
