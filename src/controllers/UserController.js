@@ -11,10 +11,6 @@ class UserController {
        if (userAlreadyExists) {
            return res.status(400).json({ error: 'Usuario ja cadastrado' });
        }
-
-       if (!name || !email) {
-           return res.status(400).json({ error: 'Campos obrigatorio' });
-       }
        const createdUser = await User.create({ name, email, password });
 
        return res.json(createdUser);
@@ -44,10 +40,7 @@ class UserController {
             return res.status(400).json({ error: 'Usuario nao encontrado' });
         }
 
-        if (!name || !email) {
-            return res.status(400).json({ error: 'Campos obrigatorio' });
-        }
-
+ 
         user.name = name;
         user.email = email;
         user.password = password;

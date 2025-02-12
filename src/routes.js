@@ -1,6 +1,9 @@
 const {Router} = require('express');
 const routes = Router();
 const UserController = require('./controllers/UserController');
+const validateUser = require('./middlewares/validation');
+const TaskController = require('./controllers/TaskController');
+const TagController = require('./controllers/TagController');
 
 routes.get('/health', (req, res) => {
     return res.status(200).json({message: 'Server online'});
@@ -10,7 +13,7 @@ routes.get('/health', (req, res) => {
 // Rotas de Usuários
 
 // Rota para criar um novo usuario
-routes.post('/users', UserController.store);
+routes.post('/users',validateUser, UserController.store);
 
 // Rota para listar todos os usuarios
 routes.get('/users', UserController.index);
@@ -19,7 +22,7 @@ routes.get('/users', UserController.index);
 routes.get('/users/:id', UserController.show);
 
 // Rota para atualizar um usuario
-routes.put('/users/:id', UserController.update);
+routes.put('/users/:id',validateUser, UserController.update);
 
 // Rota para deletar um usuario
 routes.delete('/users/:id', UserController.delete);
