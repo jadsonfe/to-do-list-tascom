@@ -36,6 +36,9 @@ routes.delete('/users/:id',authMiddleware, UserController.delete);
 // Rota para criar uma nova tarefa
 routes.post('/tasks', TaskController.store);
 
+// Rota para filtrar tarefas por tags EX: /tasks/tags?tags=tag1,tag2
+routes.get('/tasks/tags', TaskController.filterTasksByTags);
+
 // Rota para listar todas as tarefas
 routes.get('/tasks', TaskController.index);
 

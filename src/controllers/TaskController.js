@@ -1,4 +1,4 @@
-const {Task} = require('../models');
+const {Task, Tag} = require('../models');
 
 class TaskController {
     // Lista todas as tarefas
@@ -13,6 +13,47 @@ class TaskController {
         const task = await Task.create({title, status, priority, description});
         return res.json(task);
     }
+
+    // Filtra tarefas por tags
+    async filterTasksByTags(req, res) {
+        try {
+          const { tags } = req.query;
+      
+          if (!tags || tags.length === 0) {
+            return res.status(400).json({ message: 'É necessário fornecer ao menos uma tag para filtrar as tarefas.' });
+          }
+      
+          const tagNames = tags.split(',');
+      
+    
+          const tagsFound = await Tag.findAll({
+            where: {
+              name: tagNames
+            }
+          });
+      
+          if (tagsFound.length !== tagNames.length) {
+            return res.status(404).json({ message: 'Algumas tags não foram encontradas.' });
+          }
+      
+          
+          const tasks = await Task.findAll({
+            include: {
+              model: Tag,
+              where: {
+                name: tagNames
+              },
+              through: { attributes: [] }, 
+              required: true
+            }
+          });
+      
+          return res.status(200).json(tasks);
+        } catch (error) {
+          console.error(error);
+          return res.status(500).json({ message: 'Erro ao filtrar tarefas por tags.' });
+        }
+      };
 
     // Mostra uma unica tarefa
     async show(req, res) {
