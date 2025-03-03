@@ -2,6 +2,8 @@ const {Router} = require('express');
 const routes = Router();
 const UserController = require('./controllers/UserController');
 const validateUser = require('./middlewares/validation');
+const validateTask = require('./middlewares/validation');
+const validateTag = require('./middlewares/validation');
 const TaskController = require('./controllers/TaskController');
 const TagController = require('./controllers/TagController');
 const authMiddleware = require('./middlewares/authMiddleware');
@@ -20,10 +22,10 @@ routes.post('/users/register',validateUser, UserController.store);
 routes.post('/users/login', UserController.login);
 
 // Rota para listar todos os usuarios
-routes.get('/users', UserController.index);
+routes.get('/users', authMiddleware , UserController.index);
 
 // Rota para mostrar um unico usuario
-routes.get('/users/:id', UserController.show);
+routes.get('/users/:id', authMiddleware , UserController.show);
 
 // Rota para atualizar um usuario
 routes.put('/users/:id',validateUser, authMiddleware , UserController.update);
@@ -34,38 +36,38 @@ routes.delete('/users/:id',authMiddleware, UserController.delete);
 // Rotas de Tarefas
 
 // Rota para criar uma nova tarefa
-routes.post('/tasks', TaskController.store);
+routes.post('/tasks', validateTask,  authMiddleware ,TaskController.store);
 
 // Rota para filtrar tarefas por tags EX: /tasks/tags?tags=tag1,tag2
-routes.get('/tasks/tags', TaskController.filterTasksByTags);
+routes.get('/tasks/tags', authMiddleware , TaskController.filterTasksByTags);
 
 // Rota para listar todas as tarefas
-routes.get('/tasks', TaskController.index);
+routes.get('/tasks', authMiddleware , TaskController.index);
 
 // Rota para mostrar uma unica tarefa
-routes.get('/tasks/:id', TaskController.show);
+routes.get('/tasks/:id', authMiddleware , TaskController.show);
 
 // Rota para atualizar uma tarefa
-routes.put('/tasks/:id', TaskController.update);
+routes.put('/tasks/:id', validateTask, authMiddleware , TaskController.update);
 
 // Rota para deletar uma tarefa
-routes.delete('/tasks/:id', TaskController.delete);
+routes.delete('/tasks/:id', authMiddleware , TaskController.delete);
 
 // Rotas de Tags
 
 // Rota para criar uma nova tag
-routes.post('/tags', TagController.store);
+routes.post('/tags', validateTag, authMiddleware , TagController.store);
 
 // Rota para listar todas as tags
-routes.get('/tags', TagController.index);
+routes.get('/tags', authMiddleware , TagController.index);
 
 // Rota para mostrar uma unica tag
-routes.get('/tags/:id', TagController.show);
+routes.get('/tags/:id', authMiddleware , TagController.show);
 
 // Rota para atualizar uma tag
-routes.put('/tags/:id', TagController.update);
+routes.put('/tags/:id', validateTag, authMiddleware , TagController.update);
 
 // Rota para deletar uma tag
-routes.delete('/tags/:id', TagController.delete);
+routes.delete('/tags/:id', authMiddleware , TagController.delete);
 
 module.exports = routes;
