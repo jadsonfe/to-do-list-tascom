@@ -6,6 +6,7 @@ const {validateTask} = require('./middlewares/validation');
 const {validateTag} = require('./middlewares/validation');
 const TaskController = require('./controllers/TaskController');
 const TagController = require('./controllers/TagController');
+const WorkspaceController = require('./controllers/WorkspaceController');
 const authMiddleware = require('./middlewares/authMiddleware');
 
 routes.get('/health', (req, res) => {
@@ -69,5 +70,22 @@ routes.put('/tags/:id', validateTag, authMiddleware , TagController.update);
 
 // Rota para deletar uma tag
 routes.delete('/tags/:id', authMiddleware , TagController.delete);
+
+// Rota de workspace
+
+// Rota para criar um novo workspace
+routes.post('/workspaces', authMiddleware , WorkspaceController.store);
+
+// Rota para visualizar todos os workspaces
+routes.get('/workspaces', authMiddleware , WorkspaceController.index);
+
+// Rota para visualizar um workspace
+routes.get('/workspaces/:id', authMiddleware , WorkspaceController.show);
+
+// Rota para atualizar um workspace
+routes.put('/workspaces/:id', authMiddleware , WorkspaceController.update);
+
+// Rota para deletar um workspace
+routes.delete('/workspaces/:id', authMiddleware , WorkspaceController.delete);
 
 module.exports = routes;

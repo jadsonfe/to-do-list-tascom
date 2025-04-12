@@ -29,6 +29,16 @@ class WorkspaceController {
         await workspace.update({ name });
         return res.json(workspace);
     }
+
+    async delete(req, res) {
+        const { id } = req.params;
+        const workspace = await Workspace.findByPk(id);
+        if (!workspace) {
+            return res.status(404).json({ error: 'Workspace not found' });
+        }
+        await workspace.destroy();
+        return res.json({ message: 'Workspace deleted successfully' });
+    }
 }
 
 module.exports = new WorkspaceController();
