@@ -1,8 +1,20 @@
 const joi = require('joi');
+
 const userSchema = joi.object({
-    name: joi.string().required().message('O nome é obrigatorio'),
-    email: joi.string().email().required().message('E-mail inválido'),
-    password: joi.string().required().min(6).message('A senha deve ter pelo menos 6 caracteres'),
+    name: joi.string().required().messages({
+        'string.empty': 'O nome é obrigatório',
+        'any.required': 'O nome é obrigatório',
+    }),
+    email: joi.string().email().required().messages({
+        'string.email': 'E-mail inválido',
+        'string.empty': 'O e-mail é obrigatório',
+        'any.required': 'O e-mail é obrigatório',
+    }),
+    password: joi.string().min(6).required().messages({
+        'string.min': 'A senha deve ter pelo menos 6 caracteres',
+        'string.empty': 'A senha é obrigatória',
+        'any.required': 'A senha é obrigatória',
+    }),
 });
 
 const validateUser = (req, res, next) => {
@@ -15,10 +27,22 @@ const validateUser = (req, res, next) => {
 };
 
 const taskSchema = joi.object({
-    title: joi.string().required().message('O titulo é obrigatorio'),
-    status: joi.string().required().message('O status é obrigatorio'),
-    priority: joi.string().required().message('A prioridade é obrigatorio'),
-    description: joi.string().required().message('A descricao é obrigatorio'),
+    title: joi.string().required().messages({
+        'string.empty': 'O título é obrigatório',
+        'any.required': 'O título é obrigatório',
+    }),
+    status: joi.string().required().messages({
+        'string.empty': 'O status é obrigatório',
+        'any.required': 'O status é obrigatório',
+    }),
+    priority: joi.string().required().messages({
+        'string.empty': 'A prioridade é obrigatória',
+        'any.required': 'A prioridade é obrigatória',
+    }),
+    description: joi.string().required().messages({
+        'string.empty': 'A descrição é obrigatória',
+        'any.required': 'A descrição é obrigatória',
+    }),
 });
 
 const validateTask = (req, res, next) => {
@@ -31,8 +55,14 @@ const validateTask = (req, res, next) => {
 };
 
 const tagSchema = joi.object({
-    name: joi.string().required().message('O nome é obrigatorio'),
-    color: joi.string().required().message('A cor é obrigatorio'),
+    name: joi.string().required().messages({
+        'string.empty': 'O nome é obrigatório',
+        'any.required': 'O nome é obrigatório',
+    }),
+    color: joi.string().required().messages({
+        'string.empty': 'A cor é obrigatória',
+        'any.required': 'A cor é obrigatória',
+    }),
 });
 
 const validateTag = (req, res, next) => {
@@ -45,4 +75,3 @@ const validateTag = (req, res, next) => {
 };
 
 module.exports = { validateUser, validateTask, validateTag };
-
