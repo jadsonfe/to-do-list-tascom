@@ -7,12 +7,17 @@ module.exports = (sequelize, DataTypes) => {
    
     static associate(models) {
       // Tag tem muitas Tasks através da tabela intermediária TaskTag
-      Tag.belongsToMany(models.Task, { through: 'TaskTag' });
+      Tag.belongsToMany(models.Task, { through: 'TaskTag', as: 'tasks', foreignKey: 'TagId' });
     }
   }
   Tag.init({
-    name: DataTypes.STRING,
-    color: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    color: {
+      type: DataTypes.STRING,
+      allowNull: false}
   }, {
     sequelize,
     modelName: 'Tag',

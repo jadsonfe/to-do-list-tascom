@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   TaskTag.init({
-    TaskId: DataTypes.INTEGER,
-    TagId: DataTypes.INTEGER
+    TaskId: {type: DataTypes.INTEGER, allowNull: false, references: {model: 'Tasks', key: 'id'}},
+    TagId: {type: DataTypes.INTEGER, allowNull: false, references: {model: 'Tags', key: 'id'}},
   }, {
     sequelize,
     modelName: 'TaskTag',
