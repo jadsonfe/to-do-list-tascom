@@ -21,8 +21,8 @@ function checkToken(req, res, next) {
 
     try {
         const decoded = jwt.verify(token, secret);
-        req.user = decoded;
-        next();
+        req.user = { id: decoded.id };
+        return next();
     } catch (error) {
         if (error.name === 'TokenExpiredError') {
             return res.status(401).json({ msg: 'Token expirado. Faça login novamente.' });
