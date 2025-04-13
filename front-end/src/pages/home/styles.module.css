@@ -1,0 +1,23 @@
+.homeContainer {
+  display: grid;
+    /*grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));*/
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas de largura igual */
+    column-gap: 20px; /* Espaço entre as colunas */
+    row-gap: 20px; /* Espaço entre as linhas */
+    padding: 20px; /* Espaço interno do container */
+    justify-items: center; /* Centraliza os itens horizontalmente */
+
+    
+
+
+}
+
+.addButtonContainer {
+   position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    padding: 10px;
+
+}
