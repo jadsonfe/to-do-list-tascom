@@ -36,8 +36,8 @@
     --secondary-12: #121212;
     --secondary-13: #000000;
   
-    --error-1: #ff8989;
-    --error-2: #df6161;
+    --error-1: #e96c6c;
+    --error-2: #ca2c2c;
   }
   
   * {
@@ -51,6 +51,12 @@
   
   body {
     background-color: var(--primary-10);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura total da tela */
+    margin: 0;
+  
   }
   a{
     text-decoration: none;

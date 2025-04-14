@@ -16,7 +16,8 @@ export default function FormLogin() {
                     <label htmlFor="password">Senha:</label>
                     <input type="password" id="password" name="password" required />
                 </div>
-                <button type="submit">Entrar</button>
+                <button type="submit" className={styles.buttonLogin}>Entrar</button>
+
             </form>
             <div className={styles.registerLink}>
                 <p>Não tem uma conta? <a href="/register">Registrar</a></p>

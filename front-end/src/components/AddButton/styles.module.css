@@ -1,10 +1,13 @@
 .addButton{
     background-color: var(--primary-9);
     color: var(--secondary-3);
-    border: none;
+    border: 1px solid var(--primary-4);
     border-radius: 100%;
-    padding: 20px 30px;
-    font-size: 5rem;
+
+
+    height: 90px;
+    width: 90px;
+    font-size: 70px;
     cursor: pointer;
 }
 .addButton:hover{

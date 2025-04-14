@@ -1,16 +1,25 @@
-.cardWorkspace {
+
+.container {
     display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
+    align-items: stretch; 
+}
+
+.cardWorkspace {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
     background-color: var(--primary-9);
 
-    border-radius: 8px;
+    border-radius: 8px 0 0 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border: none;
-    max-width: 200px;
-    width: 100%;
-    height: 80px; /* Certifique-se de que a altura seja suficiente */
+    border: 1px solid var(--primary-4);
+    width: 150px;
+    height: 80px; 
     cursor: pointer;
+    
+
+    
 }
 
 .cardWorkspace:hover {
@@ -18,8 +27,24 @@
 }
 
 .cardWorkspace h2 {
+    
     font-size: 1.5rem;
     margin: 0;
     color: var(--secondary-3);
     font-weight: 600;
+    
+}
+
+.deleteButton {
+    flex: 1; 
+    background-color: var(--error-2);
+    color: white;
+    border: 1px solid var(--primary-4);
+    border-radius: 0 8px 8px 0; 
+    cursor: pointer;
+    padding: 10px;
+}
+
+.deleteButton:hover {
+    background-color: var(--error-1);
 }

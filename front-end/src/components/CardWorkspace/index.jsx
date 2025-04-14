@@ -8,10 +8,11 @@ export default function CardWorkspace() {
         navigate('/task');
     }
     return (
-        <>
-            <button type='button' className={styles.cardWorkspace} onClick={handleNavigateTask}>
+        <div className={styles.container}>
+            <button type="button" className={styles.cardWorkspace} onClick={handleNavigateTask}>
                 <h2>Card</h2>
             </button>
-        </>
-    )
+            <button type="button" className={styles.deleteButton}>X</button>
+        </div>
+    );
 }
