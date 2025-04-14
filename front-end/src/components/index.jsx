@@ -6,6 +6,7 @@ import FormRegister from "./FormRegister";
 import FormTag from "./FormTag";
 import FormTask from "./FormTask";
 import FormWorkspace from "./FormWorkspace";
+import SideBar from "./SideBar";
 
 
 export {
@@ -16,5 +17,6 @@ export {
     FormTag,
     FormTask,
     FormWorkspace,
-    AddButton
+    AddButton,
+    SideBar
 };

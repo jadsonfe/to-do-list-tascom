@@ -19,6 +19,8 @@ export default function Home() {
         <div className={styles.addButtonContainer}>
             <AddButton onClick={() => alert('Add new workspace')} />
         </div>
+        <a href="login">Login</a>
+        <a href="register">Register</a>
         </>
     )
 }

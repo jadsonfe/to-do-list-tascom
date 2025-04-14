@@ -52,4 +52,8 @@
   body {
     background-color: var(--primary-10);
   }
+  a{
+    text-decoration: none;
+    color: var(--secondary-1);
+  }
   
