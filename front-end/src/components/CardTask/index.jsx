@@ -1,15 +1,18 @@
 import styles from './styles.module.css';
+import { TaskService } from '../../services';
 
-export default function CardTask() {
+export default function CardTask( { task } ) {
+
+
     return (
 
             <div className={styles.cardContainer}>
                 <div className={styles.card}>
-                <h2>Card 1</h2>
-                <p>Descrição:</p>
-                <p>Status: Em andamento</p>
-                <p>Prioridade: 5</p>
-                <p>Tags:</p>
+                <h2>{task.title}</h2>
+                <p>{task.description}</p>
+                <p>{task.priority}</p>
+                <p>{task.status}</p>
+
                 </div>
                 <div className={styles.line}>
                 <button className={styles.deleteButton}>X</button>

@@ -1,11 +1,17 @@
 import styles from "./styles.module.css";
 import { useState } from "react";
 import { WorkspaceService } from "../../services";
+import { useParams } from "react-router-dom"; 
+import { getUserId } from "../../utils/tokenUtil";
 
 
 export default function FormWorkspace({ onClose }) {
+    const {id: workspaceId} = useParams();
     const [formData, setFormData] = useState({
-        name: "",
+        title: "",
+        description: "",
+        priority: "",
+        status: "",
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -20,16 +26,22 @@ export default function FormWorkspace({ onClose }) {
     }
 
     async function handleSubmit(event) {
-        event.preventDefault(); // Evita o envio padrão do formulário
+        event.preventDefault();
         setIsLoading(true);
         setErrorMessage("");
 
         try {
-            await WorkspaceService.createWorkspace(formData.name); // Faz requisição para criar usuário
-            setFormData({ name: "" }); // Limpa o formulário
-            onClose(); // Fecha o formulário
+            await TaskService.createTask(
+                workspaceId, // Aqui agora vem da URL
+                formData.title,
+                formData.description,
+                formData.priority,
+                formData.status
+            );
+            setFormData({ title: "", description: "", priority: "", status: "" });
+            onClose();
         } catch (error) {
-            setErrorMessage("Erro ao criar área de trabalho. Tente novamente.");
+            setErrorMessage("Erro ao criar tarefa. Tente novamente.");
         } finally {
             setIsLoading(false);
         }

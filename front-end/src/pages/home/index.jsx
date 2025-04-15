@@ -3,12 +3,14 @@ import { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import { WorkspaceService } from "../../services";
 import { getUserId } from "../../utils/tokenUtil";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
     const [workspaces, setWorkspaces] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [loading, setLoading] = useState(true);
     const userId = getUserId();
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function loadWorkspaces() {
@@ -21,11 +23,16 @@ export default function Home() {
                 setLoading(false);
             }
         }
-        
+
         if (userId) {
             loadWorkspaces();
         }
     }, [userId]);
+
+    const handleWorkspaceClick = (id) => {
+        localStorage.setItem('workspaceId', id); // salva o ID
+        navigate(`/task/${id}`); // redireciona para a página de tarefas
+    };
 
     const handleRefreshWorkspaces = async () => {
         const workspacesData = await WorkspaceService.getWorkspaceByUserId(userId);
@@ -39,15 +46,20 @@ export default function Home() {
     return (
         <div className={styles.homePage}>
             <LogOut />
-            
+
             <div className={styles.homeContainer}>
                 {workspaces.length > 0 ? (
                     workspaces.map((workspace) => (
-                        <CardWorkspace 
+                        <div 
                             key={workspace.id}
-                            workspace={workspace}
-                            onDelete={handleRefreshWorkspaces}
-                        />
+                            onClick={() => handleWorkspaceClick(workspace.id)}
+                            style={{ cursor: 'pointer' }}
+                        >
+                            <CardWorkspace 
+                                workspace={workspace}
+                                onDelete={handleRefreshWorkspaces}
+                            />
+                        </div>
                     ))
                 ) : (
                     <p className={styles.emptyMessage}>Nenhum workspace encontrado</p>

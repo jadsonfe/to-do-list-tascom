@@ -18,7 +18,7 @@ export default function Routes() {
                 }
             />
             <Route
-                path="/task"
+                path="/task/:workspaceId"
                 element={
                     <PrivateRoute>
                         <Task />

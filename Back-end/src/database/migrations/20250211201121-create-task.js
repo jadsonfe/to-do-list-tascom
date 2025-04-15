@@ -37,9 +37,32 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+    await queryInterface.addColumn('Tasks', 'workspaceId', {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Workspaces',
+        key: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
+    });
+
+    await queryInterface.addColumn('Tasks', 'userId', {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Users',
+        key: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
+    });
   },
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Tasks');
+    await queryInterface.removeColumn('Tasks', 'workspaceId');
+    await queryInterface.removeColumn('Tasks', 'userId');
   }
 };

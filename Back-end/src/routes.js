@@ -37,7 +37,7 @@ routes.delete('/users/:id',authMiddleware, UserController.delete);
 // Rotas de Tarefas
 
 // Rota para criar uma nova tarefa
-routes.post('/tasks', validateTask,  authMiddleware ,TaskController.store);
+routes.post('/workspaces/:workspaceId/tasks', validateTask,  authMiddleware ,TaskController.store);
 
 // Rota para filtrar tarefas por tags EX: /tasks/tags?tags=tag1,tag2
 routes.get('/tasks/tags', authMiddleware , TaskController.filterTasksByTags);
@@ -53,6 +53,9 @@ routes.put('/tasks/:id', validateTask, authMiddleware , TaskController.update);
 
 // Rota para deletar uma tarefa
 routes.delete('/tasks/:id', authMiddleware , TaskController.delete);
+
+// Rota para todas as tasks de um workspace
+routes.get('/tasks/workspace/:workspaceId', authMiddleware , TaskController.filterTasksByWorkspace);
 
 // Rotas de Tags
 

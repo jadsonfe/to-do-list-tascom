@@ -9,10 +9,31 @@ class TaskController {
 
     // Cria uma nova tarefa
     async store(req, res) {
-        const {title, status, priority, description} = req.body;
-        const task = await Task.create({title, status, priority, description});
-        return res.json(task);
+      const { title, status, priority, description } = req.body;
+      const { workspaceId } = req.params;
+      const userId = req.userId; // ← vindo do authMiddleware
+    
+      if (!workspaceId || !userId) {
+        return res.status(400).json({ message: 'workspaceId e userId são obrigatórios.' });
+      }
+    
+      try {
+        const task = await Task.create({
+          title,
+          status,
+          priority,
+          description,
+          workspaceId,
+          userId,
+        });
+    
+        return res.status(201).json(task);
+      } catch (error) {
+        console.error('Erro ao criar task:', error);
+        return res.status(500).json({ message: 'Erro ao criar task.' });
+      }
     }
+    
 
     // Filtra tarefas por tags
     async filterTasksByTags(req, res) {
@@ -78,6 +99,28 @@ class TaskController {
         await task.destroy();
         return res.json({message: 'Tarefa deletada com sucesso'});
     }
+
+    // tpdas as tasks de um workspace por id
+    async filterTasksByWorkspace(req, res) {
+
+        try {
+          const { workspaceId } = req.params;
+          console.log("workspaceId recebido:", req.params.workspaceId);
+          console.log("workspaceId:", workspaceId);
+          if (!workspaceId) {
+            return res.status(400).json({ message: "Workspace ID é obrigatório." });
+          }
+          const tasks = await Task.findAll({
+            where: {
+              workspaceId: workspaceId
+            },
+          });
+          return res.json(tasks);
+        } catch (error) {
+          console.error(error);
+          return res.status(500).json({ message: 'Erro ao filtrar tarefas por workspace.' });
+        }
+      };
 }
 
 module.exports = new TaskController();
