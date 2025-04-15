@@ -2,6 +2,7 @@ import styles from './styles.module.css'
 import { UserService } from '../../services'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import { setToken } from '../../utils/tokenUtil'
 
 export default function FormLogin() {
     const [formData, setFormData] = useState({
@@ -31,13 +32,15 @@ export default function FormLogin() {
         setErrorMessage("");
 
         try {
-            await UserService.login(formData.email, formData.password); // Faz requisição para logar usuário
-
-            setFormData({ email: "", password: "" }); // Limpa o formulário
-            handleNavigateWorkspace()
+            const data = await UserService.login(formData.email, formData.password); // agora armazena a resposta
+        
+            setToken(data.token); // salva o token
+            setFormData({ email: "", password: "" }); // limpa o form
+            handleNavigateWorkspace(); // redireciona para /
         } catch (error) {
             setErrorMessage("Erro ao logar. Tente novamente.");
-        } finally {
+        }
+         finally {
             setIsLoading(false);
         }
     }

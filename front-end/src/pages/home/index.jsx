@@ -1,9 +1,17 @@
-import { CardWorkspace, AddButton, FormWorkspace } from "../../components";
+import { CardWorkspace, AddButton, FormWorkspace, LogOut } from "../../components";
 import { useState } from "react";
 import styles from "./styles.module.css";
+import { isAuthenticated } from "../../utils/tokenUtil";
+import { useNavigate } from "react-router";
 
 export default function Home() {
+
+    
+
+    
     const [isModalVisible, setIsModalVisible] = useState(false);
+
+
 
     function handleShowModal() {
         setIsModalVisible(true);
@@ -15,7 +23,8 @@ export default function Home() {
 
     return (
         <div className={styles.homePage}>
-            <a href="login">Sair</a>
+            
+            <LogOut />
 
             <div className={styles.homeContainer}>
                 {Array.from({ length: 12 }).map((_, index) => (

@@ -7,6 +7,8 @@ import FormTag from "./FormTag";
 import FormTask from "./FormTask";
 import FormWorkspace from "./FormWorkspace";
 import SideBar from "./SideBar";
+import LogOut from "./LogOut";
+import PrivateRoute from "./PrivateRoute";
 
 
 export {
@@ -18,5 +20,7 @@ export {
     FormTask,
     FormWorkspace,
     AddButton,
-    SideBar
+    SideBar,
+    LogOut,
+    PrivateRoute
 };

@@ -1,8 +1,17 @@
+const TOKEN_KEY = 'authToken';
+
+export const setToken = (token) => {
+    localStorage.setItem(TOKEN_KEY, token);
+};
 
 export const getToken = () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-        return token;
-    }
-    return null;
-}
+    return localStorage.getItem(TOKEN_KEY);
+};
+
+export const removeToken = () => {
+    localStorage.removeItem(TOKEN_KEY);
+};
+
+export const isAuthenticated = () => {
+    return !!getToken(); // retorna true se tiver token
+};
