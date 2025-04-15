@@ -17,10 +17,10 @@ routes.get('/health', (req, res) => {
 // Rotas de Usuários
 
 // Rota para criar um novo usuario
-routes.post('/users/register',validateUser, UserController.store);
+routes.post('/user/register',validateUser, UserController.store);
 
 // Rota para login
-routes.post('/users/login', UserController.login);
+routes.post('/user/login', UserController.login);
 
 // Rota para listar todos os usuarios
 routes.get('/users', authMiddleware , UserController.index);
