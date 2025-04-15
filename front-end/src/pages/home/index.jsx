@@ -30,8 +30,8 @@ export default function Home() {
     }, [userId]);
 
     const handleWorkspaceClick = (id) => {
-        localStorage.setItem('workspaceId', id); // salva o ID
-        navigate(`/task/${id}`); // redireciona para a página de tarefas
+        localStorage.setItem('workspaceId', id); 
+        navigate(`/task/${id}`); 
     };
 
     const handleRefreshWorkspaces = async () => {

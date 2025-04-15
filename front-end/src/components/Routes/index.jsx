@@ -1,6 +1,6 @@
-import { Routes as ReactRouterRoutes, Route } from 'react-router-dom'; // recomendo usar esse, mais direto
+import { Routes as ReactRouterRoutes, Route } from 'react-router-dom'; 
 import { Home, Login, Register, Task } from '../../pages';
-import PrivateRoute from '../PrivateRoute'; // sem chaves se for export default
+import PrivateRoute from '../PrivateRoute'; 
 
 export default function Routes() {
     return (
@@ -8,7 +8,7 @@ export default function Routes() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
-            {/* Rotas protegidas */}
+
             <Route
                 path="/"
                 element={

@@ -11,7 +11,7 @@ class TaskController {
     async store(req, res) {
       const { title, status, priority, description } = req.body;
       const { workspaceId } = req.params;
-      const userId = req.userId; // ← vindo do authMiddleware
+      const userId = req.userId; 
     
       if (!workspaceId || !userId) {
         return res.status(400).json({ message: 'workspaceId e userId são obrigatórios.' });

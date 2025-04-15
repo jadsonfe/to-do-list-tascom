@@ -43,9 +43,9 @@ const WorkspaceService = {
         return response.data;
     },
     async getWorkspaceByUserId(userId) {
-        const response = await api.get(`/workspaces/user/${userId}`, {  // Ajuste para a URL correta
+        const response = await api.get(`/workspaces/user/${userId}`, {  
             headers: {
-                Authorization: `Bearer ${getToken()}`,  // Incluindo o token de autenticação
+                Authorization: `Bearer ${getToken()}`,  
             },
         });
         return response.data;

@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import FormTask from "../FormTask";
 import { TaskService } from "../../services";
 import { getUserId } from '../../utils/tokenUtil';
-import { useParams } from 'react-router-dom'; // Certifique-se de importar corretamente
+import { useParams } from 'react-router-dom'; 
 
 export default function SideBar() {
-    const { id: workspaceId } = useParams(); // Renomeei para clareza
+    const { id: workspaceId } = useParams(); 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [loading, setLoading] = useState(true);
     const userId = getUserId();

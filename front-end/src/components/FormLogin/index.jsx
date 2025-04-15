@@ -27,16 +27,16 @@ export default function FormLogin() {
     }
 
     async function handleSubmit(event) {
-        event.preventDefault(); // Evita o envio padrão do formulário
+        event.preventDefault(); 
         setIsLoading(true);
         setErrorMessage("");
 
         try {
-            const data = await UserService.login(formData.email, formData.password); // agora armazena a resposta
+            const data = await UserService.login(formData.email, formData.password);
         
-            setToken(data.token); // salva o token
-            setFormData({ email: "", password: "" }); // limpa o form
-            handleNavigateWorkspace(); // redireciona para /
+            setToken(data.token); 
+            setFormData({ email: "", password: "" }); 
+            handleNavigateWorkspace(); 
         } catch (error) {
             setErrorMessage("Erro ao logar. Tente novamente.");
         }

@@ -6,7 +6,7 @@ import { isAuthenticated } from "../../utils/tokenUtil";
 import { TaskService } from "../../services";
 
 export default function Task() {
-    const { workspaceId } = useParams(); // Obtém o ID do workspace da URL
+    const { workspaceId } = useParams(); 
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
