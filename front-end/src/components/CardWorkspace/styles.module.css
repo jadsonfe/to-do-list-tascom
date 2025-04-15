@@ -2,6 +2,7 @@
 .container {
     display: flex;
     align-items: stretch; 
+    color: aliceblue;
 }
 
 .cardWorkspace {

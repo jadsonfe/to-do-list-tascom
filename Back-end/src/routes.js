@@ -76,8 +76,6 @@ routes.delete('/tags/:id', authMiddleware , TagController.delete);
 // Rota para criar um novo workspace
 routes.post('/workspaces', authMiddleware , WorkspaceController.store);
 
-// Rota para visualizar todos os workspaces
-routes.get('/workspaces', authMiddleware , WorkspaceController.index);
 
 // Rota para visualizar um workspace
 routes.get('/workspaces/:id', authMiddleware , WorkspaceController.show);
@@ -87,5 +85,8 @@ routes.put('/workspaces/:id', authMiddleware , WorkspaceController.update);
 
 // Rota para deletar um workspace
 routes.delete('/workspaces/:id', authMiddleware , WorkspaceController.delete);
+
+// Rota para visualizar todas as workspaces de um usuario
+routes.get('/workspaces/user/:id', authMiddleware , WorkspaceController.showWorkspacesByUser);
 
 module.exports = routes;

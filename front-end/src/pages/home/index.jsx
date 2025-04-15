@@ -1,45 +1,69 @@
 import { CardWorkspace, AddButton, FormWorkspace, LogOut } from "../../components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./styles.module.css";
-import { isAuthenticated } from "../../utils/tokenUtil";
-import { useNavigate } from "react-router";
+import { WorkspaceService } from "../../services";
+import { getUserId } from "../../utils/tokenUtil";
 
 export default function Home() {
-
-    
-
-    
+    const [workspaces, setWorkspaces] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const userId = getUserId();
 
+    useEffect(() => {
+        async function loadWorkspaces() {
+            try {
+                const workspacesData = await WorkspaceService.getWorkspaceByUserId(userId);
+                setWorkspaces(workspacesData);
+            } catch (error) {
+                console.error("Erro ao carregar workspaces:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        
+        if (userId) {
+            loadWorkspaces();
+        }
+    }, [userId]);
 
+    const handleRefreshWorkspaces = async () => {
+        const workspacesData = await WorkspaceService.getWorkspaceByUserId(userId);
+        setWorkspaces(workspacesData);
+    };
 
-    function handleShowModal() {
-        setIsModalVisible(true);
-    }
-
-    function handleCloseModal() {
-        setIsModalVisible(false);
+    if (loading) {
+        return <div className={styles.loading}>Carregando...</div>;
     }
 
     return (
         <div className={styles.homePage}>
-            
             <LogOut />
-
+            
             <div className={styles.homeContainer}>
-                {Array.from({ length: 12 }).map((_, index) => (
-                    <CardWorkspace key={index} />
-                ))}
+                {workspaces.length > 0 ? (
+                    workspaces.map((workspace) => (
+                        <CardWorkspace 
+                            key={workspace.id}
+                            workspace={workspace}
+                            onDelete={handleRefreshWorkspaces}
+                        />
+                    ))
+                ) : (
+                    <p className={styles.emptyMessage}>Nenhum workspace encontrado</p>
+                )}
             </div>
 
             <div className={styles.addButtonContainer}>
-                <AddButton onClick={handleShowModal} />
+                <AddButton onClick={() => setIsModalVisible(true)} />
             </div>
 
-            {/* Modal que aparece ao clicar no botão */}
             {isModalVisible && (
                 <div className={styles.modalOverlay}>
-                    <FormWorkspace onClose={handleCloseModal} />
+                    <FormWorkspace 
+                        onClose={() => setIsModalVisible(false)}
+                        onSuccess={handleRefreshWorkspaces}
+                    />
                 </div>
             )}
         </div>

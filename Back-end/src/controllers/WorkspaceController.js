@@ -65,6 +65,17 @@ class WorkspaceController {
             return res.status(500).json({ error: 'Erro no servidor. Tente novamente mais tarde.' });
         }
     }
+    // visualizar todas as workspaces de um usuario
+    async showWorkspacesByUser(req, res) {
+        try {
+            const userId = req.user.id; // Obtém o ID do usuário do token JWT
+            const workspaces = await Workspace.findAll({ where: { userId } });
+            return res.status(200).json(workspaces);
+        } catch (error) {
+            console.error('Erro ao listar workspaces do usuário:', error);
+            return res.status(500).json({ error: 'Erro no servidor. Tente novamente mais tarde.' });
+        }
+    }
 }
 
 module.exports = new WorkspaceController();
