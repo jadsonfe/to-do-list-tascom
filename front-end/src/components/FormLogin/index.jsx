@@ -1,6 +1,7 @@
 import styles from './styles.module.css'
 import { UserService } from '../../services'
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
 
 export default function FormLogin() {
     const [formData, setFormData] = useState({
@@ -18,6 +19,12 @@ export default function FormLogin() {
         }));
     }
 
+    const navigate = useNavigate()
+
+    async function handleNavigateWorkspace() {
+        navigate('/')
+    }
+
     async function handleSubmit(event) {
         event.preventDefault(); // Evita o envio padrão do formulário
         setIsLoading(true);
@@ -25,8 +32,9 @@ export default function FormLogin() {
 
         try {
             await UserService.login(formData.email, formData.password); // Faz requisição para logar usuário
-            alert("Usuário logado com sucesso!");
+
             setFormData({ email: "", password: "" }); // Limpa o formulário
+            handleNavigateWorkspace()
         } catch (error) {
             setErrorMessage("Erro ao logar. Tente novamente.");
         } finally {
@@ -49,7 +57,7 @@ export default function FormLogin() {
                     <label htmlFor="password">Senha:</label>
                     <input type="password" id="password" name="password" required onChange={handleChange} value={formData.password} />
                 </div>
-                <button type="submit" className={styles.buttonLogin} disabled={isLoading}>Entrar
+                <button type="submit" className={styles.buttonLogin} disabled={isLoading}>
                     {isLoading ? "Carregando..." : "Entrar"}
                 </button>
 

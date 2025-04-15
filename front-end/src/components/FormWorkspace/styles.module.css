@@ -1,0 +1,87 @@
+
+/* CancelButton posicionado na ponta direita superior */
+/*
+.cancelButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 8px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+    */
+.formCreate {
+    display: flex;
+    flex-direction: column; /* Organiza os elementos do formulário em coluna */
+    justify-content: center;
+    align-items: center;
+    width: 300px; /* Largura fixa para o bloco do formulário */
+    height: 300px; /* Altura automática para o bloco do formulário */
+    padding: 20px; /* Espaçamento interno */
+    background-color: var(--primary-9); /* Cor de fundo suave */
+    border: 1px solid var(--primary-4); /* Adiciona uma borda */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+    color: var(--primary-1);
+  }
+  
+  .formGroup {
+    width: 100%; /* Preenche toda a largura do formulário */
+    margin-bottom: 15px; /* Espaçamento entre os grupos */
+  }
+  
+  .formGroup label {
+    display: block; /* Deixa o label acima do input */
+    margin-bottom: 5px;
+    font-weight: bold; /* Destaca o texto */
+  }
+  
+  .formGroup input {
+    width: 100%; /* Ocupa toda a largura do container */
+    padding: 8px;
+    border: 1px solid var(--primary-7);
+    border-radius: 4px; /* Borda arredondada para inputs */
+    box-sizing: border-box; /* Inclui padding dentro da largura */
+  }
+  .formCreate h2 {
+    display: flex;
+    justify-content: top;
+    padding-bottom: 50px;
+  }
+  
+  
+  
+  .createButton {
+    width: 100%; /* Botão com largura igual ao formulário */
+    padding: 10px;
+    background-color: var(--primary-5);
+    color: var(--secondary-1);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .createButton:hover {
+    background-color: #0056b3; /* Efeito de hover */
+  }
+
+  .cancelButton {
+    width: 100%; /* Botão com largura igual ao formulário */
+    padding: 10px;
+    margin: 10px;
+    background-color: var(--error-2);
+    color: var(--secondary-1);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .cancelButton:hover {
+    background-color: var(--error-1); /* Efeito de hover */
+  }
+  
+ 
+  

@@ -1,6 +1,9 @@
 import styles from "./styles.module.css";
 import { UserService } from "../../services";
 import { useState } from "react";
+import { useNavigate } from "react-router";
+
+
 
 export default function FormRegister() {
     const [formData, setFormData] = useState({
@@ -20,6 +23,11 @@ export default function FormRegister() {
         }));
     }
 
+    const navigate = useNavigate();
+
+    async function handleNavigateLogin() {
+        navigate('/login');
+    }
     async function handleSubmit(event) {
         event.preventDefault(); // Evita o envio padrão do formulário
         setIsLoading(true);
@@ -27,8 +35,8 @@ export default function FormRegister() {
 
         try {
             await UserService.register(formData.name, formData.email, formData.password); // Faz requisição para criar usuário
-            alert("Usuário registrado com sucesso!");
             setFormData({ name: "", email: "", password: "" }); // Limpa o formulário
+            handleNavigateLogin()
         } catch (error) {
             setErrorMessage("Erro ao registrar. Tente novamente.");
         } finally {

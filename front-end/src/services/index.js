@@ -1,3 +1,4 @@
 import UserService from "./UserService";
+import WorkspaceService from "./WorkspaceService";
 
-export { UserService };
+export { UserService, WorkspaceService };
